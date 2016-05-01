@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.ios.theme.css" />
+<script src="js/app.min.js"></script>
+ <link rel="resource" type="application/l10n" href="locales/locales.ini" />
+ <script src="js/l10n.js"></script>
+<style>
+  
+  .ui-content
+{
+  margin-bottom:75px; 
+}
+.in, .out {
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 350ms !important;
+}
+.ui-body-c, .ui-overlay-c { background:#000; }
+.ui-footer {
+  position: absolute !important;
+  bottom: 0;
+  width: 100%;
+} #principal * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}   dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+dt { font-size: 2em; font-weight: bold; }
+dt span { font-size: .5em; color: #777; margin-left: .5em; }
+dd { font-size: 1.25em; margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+
+
+#TxDescripcion,#TxMedida,#TxMax{
+ width: 96% !important;
+ margin-left: 2% !important;
+ margin-right: 2% !important;
+ border: 1px solid #4A87EE !important; 
+} 
+#TxFecha{
+ width: 96% !important;
+ margin-left: 3% !important;
+  
+ border: 1px solid #4A87EE !important;
+text-align: center;  }
+#TxHora{
+ width: 95% !important;
+ margin-left: 2% !important;
+ margin-right: 3% !important;
+ border: 1px solid #4A87EE !important; text-align: center; 
+} 
+
+#der {
+  float: left;
+  width: 50%;
+  max-height:100%;
+  overflow: scroll;
+}
+
+</style>
+</head>
+<body >
+<div data-role="page" id="principal">
+	<div data-role="header" data-theme="d" data-position="fixed">
+   <a href="#left-panel" data-icon="ion-navicon-round" data-iconpos="notext"></a> 		<h1 style="text-align:left; margin-left:40px;" data-l10n-id="app-name">ControlGlicemia</h1>
+	</div>
+	<div role="main" class="ui-content">
+ <input class="texto" style="margin-top:20px" type="text" data-l10n-id="app-txt-description" placeholder="Escriba una descripcion" name="TxDescripcion" id="TxDescripcion">
+ <select  name="Etiqueta" id="Etiqueta" data-corners="false"  data-mini="true">
+  <option data-l10n-id="app-txt-antes-desayuno"  value="1">Antes Desayuno</option>
+  <option data-l10n-id="app-txt-despues-desayuno" value="2">Después Desayuno</option>
+  <option data-l10n-id="app-txt-antes-almuerzo" value="2"value="3">Antes Almuerzo</option>
+  <option data-l10n-id="app-txt-despues-almuerzo" value="4">Después Almuerzo</option>
+  <option data-l10n-id="app-txt-antes-cena" value="5">Antes Cena</option>
+  <option data-l10n-id="app-txt-despues-cena" value="6">Después Cena</option>
+  <option data-l10n-id="app-txt-nocturna" value="7">Nocturna</option>
+ </select>
+ <div class="ui-grid-a">
+ <div class="ui-block-a">
+<input class="texto" type="date" name="TxFechag" data-inline="true"  id="TxFecha">
+ </div>  
+ <div class="ui-block-b">
+ <input class="texto" type="time" name="TxHora"  step="1" data-inline="true" id="TxHora">
+ </div>
+  </div>
+ <label style="margin-top:20px;margin-left:2%" data-l10n-id="app-txt-medida" for="TxMedida">Nivel Glucosa <span id="umedida">[mg/dl]</umedida></label>
+ <input class="texto"  style="text-align: center;" type="number" name="TxMedida" id="TxMedida">
+ 
+<button  style="margin-top:40px" data-l10n-id="app-txt-guardar-registro"  id="BtAgregar">Guardar Registro</button> 	</div><!-- /content -->
+<div data-role="panel" id="left-panel">
+  <p><span data-l10n-id="app-txt-acerca">Acerca de...</span></p>
+<h3>Control Glicemia</h3>
+		<p> Aplicación desarrollada por <a target="_blank" href="http://www.twitter.com/chalalo">@chalalo</a>. Cualquier duda me la puedes hacer llegar a la cuenta twitter o a mi correo gonpec@gmail.com. Espero que te sea de utilidad, yo también soy Diabético
+		<p> Ya vienen nuevos Updates con cambios visuales, calendarios, claves,etc, por mientras , la funcionalidad básica :) </p>
+  <a href="#" data-rel="close"  class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline icon-left ui-btn-right">Cerrar</a>
+  </div>
+  <div data-role="footer"  >
+  <div data-role="navbar">
+<ul>
+  <li><a href="#pageRegistros" data-l10n-id="app-txt-listado" data-transition="none" data-icon="bars">Listado</a></li>
+ <li><a id="BtEstadistica" data-l10n-id="app-txt-control"  data-transition="none" href="#estadisticas" data-icon="heart">Control</a></li>
+  <li><a href="#configuracion" data-l10n-id="app-txt-setup"  data-transition="none" data-icon="gear">Setup</a></li>
+</ul>
+  </div>
+</div>
+</div>
+<div data-role="page" id="pageRegistros">
+	
+  <div  data-theme="d" data-role="header" data-position="fixed">
+  <a href="#principal" data-transition="none"  data-icon="ion-chevron-left"  data-iconpos="notext"></a>
+  	<h1 data-l10n-id="app-txt-mi-historia">Mi Historia</h1>
+	</div>	<div role="main" class="ui-content">
+		<p>
+  <ul data-role="listview"  id ="ListaRegistros" >
+ </ul>
+</p>
+	</div> <div data-role="footer" data-position="fixed">
+   <h4><span id="cantt"></span> Registro(s)</h4>
+</div>
+</div>
+<div data-role="page" id="configuracion">
+	<div  data-theme="d" data-role="header">
+  <a href="#principal" data-transition="none"  data-icon="ion-chevron-left"  data-iconpos="notext"></a> 		<h1>Configuración</h1>
+	</div><!-- /header -->
+	<div role="main" class="ui-content">
+	
+  <label  style="margin-top:4px;margin-left:2%" for="SMedida">Eligir unidad de glucosa</label>
+  <select  name="SMedida" id="SMedida" >
+ <option value="mg/dl">mg/dl</option>
+ <option value="mmol/l">mmol/l</option>
+  </select>
+  
+  <label style="margin-top:4px;margin-left:2%" for="cantidad">Cantidad de Mediciones a mostrar</label>
+  <select  name="cantidad" id="cantidad" >
+ <option value="10">10</option>
+ <option value="25">25</option>
+ <option value="50">50</option>
+ <option value="100">100</option>
+  </select>
+  
+  <label  style="margin-top:4px;margin-left:2%" for="TxMax">Nivel Glucosa máximo de Referencia </label>
+  <input type="number" name="TxMax" id="TxMax">
+  
+  <button style="margin-top:7px"  id="BtGuardarConfiguracion">Guardar Configuracion</button>
+  <button style="margin-top:5px"  id="BtBorrarTodo">Eliminar Todos los Registros</button>
+ 
+	</div>
+</div> 
+  
+ <div data-role="page" id="detalleRegistro">
+	
+<div  data-theme="d" data-role="header">
+  <a href="#pageRegistros" data-transition="none"  data-icon="ion-chevron-left"  data-iconpos="notext"></a>
+   		<h1>Detalle</h1>
+	</div>
+  <div role="main" class="ui-content">
+	
+<div id="lbValor" style="text-align:center;color:#black;font-size:30px;font-weight:bold"></div>
+<div id="lbFecha" style="margin-left:3%;margin-top:10px;color:#4A87EE;font-size:20px;"></div>
+<div id="lbEtiqueta" style="margin-left:3%;color:#4A87EE;font-size:20px;"></div>
+<div  id="lbDescripcion" style="margin-left:3%;color:#4A87EE;font-size:20px;"></div>  
+
+	</div>
+  <div data-role="footer" data-position="fixed">
+  <div data-role="navbar">
+<ul>
+  <li><a id="BtEnviar1"   href="#" data-icon="mail">Enviar</a></li>
+ 
+  <li><a id="BtBorrarRegistro"  href="#" data-icon="delete">Borrar</a></li> </ul>
+  </div>
+</div>
+</div>
+<style>
+  .rresumen{ text-align:left;color:#4A87EE;font-size:16px;}
+  .rresumen2{ text-align:left;color:#4A87EE;font-size:14px;}
+  .rresumen22{ text-align:left;color:#4A87EE;font-size:14px;}
+  .cuadro { margin-left:3%;margin-right:3%;background-color:white;margin-top:10px;padding:5px;
+border: 2px solid #4A87EE;
+-moz-border-radius: 13px;  }
+</style>  <div data-role="page" id="estadisticas">
+  <div data-role="header">
+   
+<div  data-theme="d" data-role="header" data-position="fixed">
+  <a href="#principal" data-transition="none"  data-icon="ion-chevron-left"  data-iconpos="notext"></a>
+   <h1>Mi Control</h1>
+  </div>
+  <div role="main" class="ui-content">
+   <div class="cuadro" >
+ <div class="rresumen" >Resumen Total:</div>
+ <span class="rresumen" >N° Mediciones:</span><span class="rresumen"  id="total_cant"></span><br>
+ <span class="rresumen" >Promedio:</span><span class="rresumen"  id="total_prom"></span>
+  </div>
+ <div class="cuadro" >
+  <div class="rresumen22" >Antes Desayuno:</div>  
+  <span class="rresumen2" >N° Mediciones:</span><span  class="rresumen2" id="ande_cant"></span><br>
+  <span class="rresumen2" >Promedio:</span><span  class="rresumen2" id="ande_prom"></span>
+  </div>
+ <div class="cuadro" >
+ <div class="rresumen22" > Después Desayuno:</div>  
+   <span class="rresumen2" >N° Mediciones:</span><span class="rresumen2" id="dede_cant"></span><br>
+ <span class="rresumen2" >Promedio:</span> <span class="rresumen2" id="dede_prom"></span>
+  </div>   <div class="cuadro" >
+ <div class="rresumen22" >Antes Almuerzo:</div>  
+ <span class="rresumen2" >N° Mediciones:</span><span class="rresumen2" id="anal_cant"></span><br>
+ <span class="rresumen2" >Promedio:</span>  <span  class="rresumen2" id="anal_prom"></span>
+  </div> 
+ <div class="cuadro" >
+  <div class="rresumen22">Después Almuerzo:</div>  
+  <span class="rresumen2" >N° Mediciones:</span><span class="rresumen2" id="deal_cant"></span><br>
+  <span class="rresumen2" >Promedio:</span><span class="rresumen2" id="deal_prom"></span>   </div>  <div class="cuadro" >
+ <div class="rresumen22">Antes Cena:</div>  
+ <span class="rresumen2" >N° Mediciones:</span> <span class="rresumen2" id="ance_cant"></span><br>
+ <span class="rresumen2" >Promedio:</span>  <span class="rresumen2" id="ance_prom"></span>
+  </div> <div class="cuadro" >
+<div class="rresumen22"> Después Cena:</div>  
+ <span class="rresumen2" >N° Mediciones:</span><span class="rresumen2" id="dece_cant"></span><br>
+  <span class="rresumen2" >Promedio:</span> <span class="rresumen2" id="dece_prom"></span>
+  </div> 
+  <div class="cuadro" >
+ <div class="rresumen22">Nocturna:</div>  
+  <span class="rresumen2" >N° Mediciones:</span><span class="rresumen2" id="nocto_cant"></span><br>
+ <span class="rresumen2" >Promedio:</span> <span class="rresumen2" id="nocto_prom"></span>
+  </div>  
+
+  </div>
+</div><!-- /page -->
+    </body>
+</html>	

@@ -1,0 +1,27 @@
+{
+  "name": "ControlGlicemia",
+  "version": "2.0",
+  "description": "Mide y controla tu nivel de Glicemia",
+  "launch_path": "/index.htm",
+  "icons": {
+    "16": "/icons/icon16x16.png",
+    "48": "/icons/icon48x48.png",
+    "60": "/icons/icon60x60.png",
+    "128": "/icons/icon128x128.png"
+  },
+  "developer": {
+    "name": "Chalalo",
+    "url": "http://www.chalalo.cl"
+  },
+ 
+
+"default_locale": "es",
+"locales": {
+  "en": {
+    "name" : "Check Glicemia",
+    "description" : "Help you to control Diabetics"
+  }
+}
+
+
+}
